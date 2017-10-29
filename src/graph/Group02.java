@@ -6,5 +6,7 @@ public class Group02
     {
         Group02 mygraph = new Group02(args[0]);
         mygraph.shortestPath(args[1].get(0));
+
+        int[][] graph = new int[10][10];
     }
 }
