@@ -9,4 +9,5 @@ public class Group02
 
         int[][] graph = new int[10][10];
     }
+    public void shortestPath(i)
 }
