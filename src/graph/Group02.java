@@ -38,7 +38,9 @@ public class Group02
         this.storeData('p', 'r', 2);
         this.storeData('r', 'k', 4);
     }
-    public void shortestPath(char x){
-        
+    public void storeData(char col1, char col2, int val){
+        int locColA = ((int) col1)-97;
+        int locColB = ((int) col2)-97;
+        graph [locColA][locColB] = val;
     }
 }
