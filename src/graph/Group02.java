@@ -38,5 +38,7 @@ public class Group02
         this.storeData('p', 'r', 2);
         this.storeData('r', 'k', 4);
     }
-    public void shortestPath(i)
+    public void shortestPath(char x){
+        
+    }
 }
