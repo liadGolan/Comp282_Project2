@@ -7,7 +7,7 @@ public class Group02
     public static void main(String[] args)
     {
         Group02 mygraph = new Group02(args[0]);
-        mygraph.shortestPath(args[1].get(0));
+        mygraph.shortestPath(args[1].charAt(0));
 
         this.storeData('a', 'o', 1);
         this.storeData('b', 'a', 7);
@@ -38,6 +38,11 @@ public class Group02
         this.storeData('p', 'r', 2);
         this.storeData('r', 'k', 4);
     }
+
+    private void shortestPath(char c) {
+
+    }
+
     public void storeData(char col1, char col2, int val){
         int locColA = ((int) col1)-97;
         int locColB = ((int) col2)-97;
