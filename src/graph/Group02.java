@@ -55,3 +55,6 @@ public class Group02
     }
 
 }
+
+//TODO: check to see if the fileReader works by printing the 2D array
+//TODO: get dijkstra code works
