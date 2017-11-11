@@ -42,7 +42,7 @@ public class Group02
     }
 
 //MAIN
-    public static void main(String [] args) // supplied command-line arguments as an array of String objects
+    public static void main(String[] args) // supplied command-line arguments as an array of String objects
     {
         Group02 mygraph = new Group02(args[0]); // created a java object using classname
         mygraph.shortestPath(args[1].charAt(0)); //calling the shortestPath class as an object
