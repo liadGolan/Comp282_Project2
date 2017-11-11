@@ -13,7 +13,7 @@ public class Group02
     private int distVal;
     private String fileName;
     private char[] storeArr;
-    public int[][] graph = new int[10][10];
+    public int[][] graph = new int[24][24];
 
 //CONSTRUCTOR
     public Group02(String fileName){
@@ -26,14 +26,13 @@ public class Group02
             while (line != null)
             {
                 storeArr = line.toCharArray(); //store the line in the file into an array as chars
-                for (int i = 0; i < storeArr.length; i++) //for every index in the array of storeArr...
-                {
-                    locColA = ((int) storeArr[i])-97; //convert index i to int and store into locColA
-                    locColB = ((int) storeArr[i+1])-97;//convert index i+1 to int and store into locColB
-                    distVal = ((int) storeArr[i+2])-97;//convert index i+2 to int and store into distVal
-                    graph[locColA][locColB]= distVal;//store as a value in the 2D made up of locColA and locColB
-                }
+                locColA = ((int) storeArr[0])-97; //convert index i to int and store into locColA
+                locColB = ((int) storeArr[2])-97;//convert index i+1 to int and store into locColB
+                distVal = ((int) storeArr[4])-48;//convert index i+2 to int and store into distVal
+                graph[locColA][locColB]= distVal;//store as a value in the 2D made up of locColA and locColB
+                line = br.readLine();
             }
+
         }
         catch(IOException exception)
         {
@@ -45,7 +44,8 @@ public class Group02
     public static void main(String[] args) // supplied command-line arguments as an array of String objects
     {
         Group02 mygraph = new Group02(args[0]); // created a java object using classname
-        mygraph.shortestPath(args[1].charAt(0)); //calling the shortestPath class as an object
+        //mygraph.shortestPath(args[1].charAt(0)); //calling the shortestPath class as an object
+        System.out.println(mygraph.checkGraphCreation());
     }
 
     private void shortestPath(char c) {
@@ -54,7 +54,21 @@ public class Group02
 
     }
 
+    // check to see if the fileReader works by printing the 2D array
+    private String checkGraphCreation()
+    {
+        String output = "";
+        for(int r = 0; r < graph.length; r+=1)
+        {
+            for(int c = 0; c < graph[r].length; c +=1)
+            {
+                output += graph[r][c] + " ";
+            }
+            output += "\n";
+        }
+        return output;
+    }
+
 }
 
-//TODO: check to see if the fileReader works by printing the 2D array
 //TODO: get dijkstra code works
