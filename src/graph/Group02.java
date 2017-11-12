@@ -87,7 +87,7 @@ public class Group02
     }
 
     /*Dijkstra algorithm. Takes in a graph and int c which represents the starting index*/
-    private static void  shortestPath(int[][] graph, int c) {
+    private static void  shortestPath(int[][] graph, int index) {
         //General Dijkstra algo
 
         boolean marked[] = new boolean[graph.length]; //shortest path tree set. Keeps track of vertices
@@ -100,22 +100,41 @@ public class Group02
             parent[i] = -1;
             weight[i] =100;
         }
-        marked[c] = true; //marking the beginning vertex as visited
+        marked[index] = true; //marking the beginning vertex as visited
+
 
         //changing parent array
         for (int i = 0;i<graph.length;i++){
-            if(graph[c][i] !=100){
-                parent[i] = c;
+            if(graph[index][i] !=100){
+                parent[i] = index;
             }
         }
-
         //changing array weights
         for (int i =0;i<graph.length;i++){
-            if(graph[c][i] != 100){
-                weight[i] = graph[c][i];
+            if(graph[index][i] != 100){
+                weight[i] = graph[index][i];
             }
         }
+        //changing marked array:
+        int nextMinimumIndex = 100; //variable will be used to determine which vertex will follow
+        //if it has the minumum weight and
+        //it is unmarked, pick it next
+        for (int i = 0; i<marked.length;i++){
+            if(weight[i]< nextMinimumIndex){
+                nextMinimumIndex = weight[i];
+            }
+            if(!marked[i]){
 
+            }
+
+        }
+
+
+
+
+
+
+/********************************************************************************************************************/
         //printing results after each change
         System.out.println("Marked graph: ");
         for (int i = 0; i<marked.length;i++){
@@ -133,7 +152,7 @@ public class Group02
         }
         System.out.println();
         System.out.println();
-        System.out.println((char)(c+97) + " origin");
+        System.out.println((char)(index+97) + " origin");
 
         for (int i =0;i<graph.length;i++){
             System.out.println((char)(i+97) +" " +weight[i]);
