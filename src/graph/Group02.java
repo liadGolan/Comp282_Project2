@@ -3,7 +3,7 @@ package graph;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Arrays;
+
 
 
 public class Group02
@@ -56,17 +56,17 @@ public class Group02
         //System.out.println(mygraph.checkGraphCreation());
         int [][]powerpoint =
                 {
-                        {100,8,100,4,9},
-                        {100,100,1,100,100},
-                        {100,2,100,100,3},
-                        {100,100,1,100,100},
-                        {100,100,2,7,100}
+                        {0,8,0,4,9},
+                        {0,0,1,0,0},
+                        {0,2,0,0,3},
+                        {0,0,1,0,0},
+                        {0,0,2,7,0}
 
                 };
-        int [][]sample = {{100,1,100,100},
-                         {100,100,10,100 },
-                         {100,100,100,5},
-                         {2,100,100,100}};
+        int [][]sample = {{0,1,0,0},
+                         {0,0,10,0 },
+                         {0,0,0,5},
+                         {2,0,0,0}};
         //mygraph.dijkstra(0);
 
         shortestPath(powerpoint,0);
@@ -87,35 +87,37 @@ public class Group02
         for (int i = 0;i<marked.length;i++){ //creation of arrays that will keep dijkstra going
             marked[i] =false;
             parent[i] = -1;
-            weight[i] =100;
+            weight[i] =Integer.MAX_VALUE;
         }
         int currentVertex = vertex;
         weight[currentVertex] = 0;
 
             /**Traversing through the graph */
-            while(!markedCheck(marked)){
-                marked[currentVertex] = true; //marking the beginning vertex as visited
+            while(!markedCheck(marked)){ //dijkstra's will continue until all vertices in the graph are marked
+
+                marked[currentVertex] = true; //marking the vertex as visited
 
                 //changing parent array
-                for (int i = 0;i<graph.length;i++){
-                    if(graph[currentVertex][i] !=100){
+                for (int i = 0;i<parent.length;i++){
+                    if(graph[currentVertex][i] !=0 &&!marked[i]){
                         parent[i] =currentVertex;
                     }
                 }
                 //changing array weights
-                for (int i =0;i<graph.length;i++){
-                    if(graph[currentVertex][i] != 100 ){
+                for (int i =0;i<weight.length;i++){
+                    if(graph[currentVertex][i] != 0 ){
                         if(parent[currentVertex]!=-1){
-                            weight[i] = weight[parent[currentVertex]]+graph[currentVertex][i];
+                            weight[i] = (weight[currentVertex]+graph[currentVertex][i]);
                         }
                         else{
                             weight[i] = graph[currentVertex][i];
                         }
 
                     }
+
                 }
                 //changing marked array; The following section is used to determine what vertex will be visited next:
-                int minimumWeight = 100;//used to determine which vertex to pick
+                int minimumWeight = Integer.MAX_VALUE;//used to determine which vertex to pick
                 int nextMinimumVertex;
                 for (int i = 0; i<weight.length;i++){
                     if(weight[i]< minimumWeight && !marked[i]){
@@ -127,9 +129,7 @@ public class Group02
                 nextMinimumVertex = getArrayIndex(weight,minimumWeight);//gets the index (vertex) with smallest weight
 
 
-
 /************PRINTING RESULTS AFTER EACH  VERTEX IS LOOKED AT *******************************************************************/
-
 
                 System.out.println("Current Vertex: "+ currentVertex);
 
@@ -155,7 +155,7 @@ public class Group02
                 currentVertex = nextMinimumVertex;
 
                 System.out.println("Current Vertex: "+ currentVertex);
-                System.out.println("------------------------------");
+                System.out.println("END OF ITERATION");
             }
         System.out.println(vertex+ " origin");
         for (int i =0;i<graph.length;i++){
@@ -176,6 +176,7 @@ public class Group02
         }
         return k;
     }
+
     /*the following method is used to stop dijkstra's after all vertices are visited */
     private static boolean markedCheck(boolean []markedGraph){
         boolean check = true;
