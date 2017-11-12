@@ -13,7 +13,7 @@ public class Group02
     private int distVal;
     private String fileName;
     private char[] storeArr;
-    public int[][] graph = new int[10][10];
+    public int[][] graph = new int[24][24];
 
 
 //CONSTRUCTOR
@@ -28,15 +28,12 @@ public class Group02
             while (line != null)
             {
                 storeArr = line.toCharArray(); //store the line in the file into an array as chars
-                for (int i = 0; i < storeArr.length; i++) //for every index in the array of storeArr...
-                {
-                    locColA = ((int) storeArr[i])-97; //convert index i to int and store into locColA
-                    locColB = ((int) storeArr[i+1])-97;//convert index i+1 to int and store into locColB
-                    distVal = ((int) storeArr[i+2])-97;//convert index i+2 to int and store into distVal
-                    graph[locColA][locColB]= distVal;//store as a value in the 2D made up of locColA and locColB
-                }
+                locColA = ((int) storeArr[0])-97; //convert index i to int and store into locColA
+                locColB = ((int) storeArr[2])-97;//convert index i+1 to int and store into locColB
+                distVal = ((int) storeArr[4])-48;//convert index i+2 to int and store into distVal
+                graph[locColA][locColB]= distVal;//store as a value in the 2D made up of locColA and locColB
+                line = br.readLine();
             }
-
 
 
         }
@@ -51,39 +48,13 @@ public class Group02
 
 
 //MAIN
-    public static void main(String [] args) // supplied command-line arguments as an array of String objects
+    public static void main(String[] args) // supplied command-line arguments as an array of String objects
     {
 
-        // Group02 mygraph = new Group02(args[0]); // created a java object using classname
-        //mygraph.shortestPath(0);
+        Group02 mygraph = new Group02(args[0]); // created a java object using classname
         //mygraph.shortestPath(args[1].charAt(0)); //calling the shortestPath class as an object
+        System.out.println(mygraph.checkGraphCreation());
 
-        //manually created graphs to test dijkstra's:
-        int[][] graph_temp = {{100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 1, 100, 100, 100}, //a
-                {7, 3, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100},// b
-                {100, 6, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100},//c
-                {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 8},//d
-                {8, 7, 100, 100, 100, 100, 8, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100},//e
-                {100, 100, 100, 100, 100, 100, 100, 100, 5, 4, 100, 100, 100, 100, 100, 100, 100, 100},//f
-                {100, 100, 100, 100, 100, 100, 100, 100, 100, 3, 1, 100, 100, 100, 100, 100, 100, 100}, //g
-                {5, 100, 100, 100, 5, 100, 100, 100, 4, 100, 100, 100, 100, 100, 5, 100, 100, 100}, //h
-                {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}, //i
-                {100, 100, 100, 100, 100, 1, 100, 100, 100, 100, 5, 100, 7, 100, 100, 100, 100, 100},//j
-                {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 8, 100, 100, 100, 100},//k
-                {100, 100, 100, 100, 100, 100, 100, 4, 100, 100, 100, 100, 100, 100, 100, 9, 100, 100},//l
-                {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 5, 100, 100, 100, 100},//m
-                {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100},//n
-                {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 9, 100, 100},//o
-                {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 3, 100, 100, 100, 100, 100},//p
-                {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100},//q
-                {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 4, 100, 100, 100, 100, 100, 100, 100}};//r
-
-        int [][]testGraph = {{100,1,100,100},
-                {100,100,10,100},
-                {100,100,100,5},
-                {2,100,100,100}};
-
-        shortestPath(testGraph,0  );
     }
 
     /*Dijkstra algorithm. Takes in a graph and int c which represents the starting index*/
@@ -172,11 +143,28 @@ public class Group02
         return check;
     } //end of markedCheck
 
+    // check to see if the fileReader works by printing the 2D array
+    private String checkGraphCreation()
+    {
+        String output = "";
+        for(int r = 0; r < graph.length; r+=1)
+        {
+            for(int c = 0; c < graph[r].length; c +=1)
+            {
+                output += graph[r][c] + " ";
+            }
+            output += "\n";
+        }
+        return output;
+    }
+
 }
+
 
 
 
 
 //TODO: check to see if the fileReader works by printing the 2D array
 //TODO: get dijkstra code works
+
 
