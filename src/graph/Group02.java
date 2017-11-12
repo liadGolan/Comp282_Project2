@@ -3,6 +3,7 @@ package graph;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 
 public class Group02
@@ -46,23 +47,40 @@ public class Group02
 
 
 
-
 //MAIN
     public static void main(String[] args) // supplied command-line arguments as an array of String objects
     {
 
         Group02 mygraph = new Group02(args[0]); // created a java object using classname
-        //mygraph.shortestPath(args[1].charAt(0)); //calling the shortestPath class as an object
-        System.out.println(mygraph.checkGraphCreation());
+        //mygraph.dijkstra(args[1].charAt(0)); //calling the shortestPath class as an object
+        //System.out.println(mygraph.checkGraphCreation());
+        int [][]powerpoint =
+                {
+                        {100,8,100,4,9},
+                        {100,100,1,100,100},
+                        {100,2,100,100,3},
+                        {100,100,1,100,100},
+                        {100,100,2,7,100}
 
+                };
+        int [][]sample = {{100,1,100,100},
+                         {100,100,10,100 },
+                         {100,100,100,5},
+                         {2,100,100,100}};
+        //mygraph.dijkstra(0);
+
+        shortestPath(powerpoint,0);
     }
 
     /*Dijkstra algorithm. Takes in a graph and int c which represents the starting index*/
-    private static void  shortestPath(int[][] graph, int index) {
+    private void dijkstra(char c){
+
+    }
+    private static void  shortestPath(int[][] graph, int vertex) {
         //General Dijkstra algo
 
-        boolean marked[] = new boolean[graph.length]; //shortest path tree set. Keeps track of vertices
-       //that have been visited
+        /**Array setup*/
+        boolean marked[] = new boolean[graph.length]; // Keeps track of vertices that have been visited
         int parent[] = new int[graph.length]; //parent graph just like the one in powerpoint
         int weight[] = new int[graph.length]; //set that will hold the weight of each vertices
 
@@ -71,73 +89,99 @@ public class Group02
             parent[i] = -1;
             weight[i] =100;
         }
-        marked[index] = true; //marking the beginning vertex as visited
+        int currentVertex = vertex;
+        weight[currentVertex] = 0;
+
+            /**Traversing through the graph */
+            while(!markedCheck(marked)){
+                marked[currentVertex] = true; //marking the beginning vertex as visited
+
+                //changing parent array
+                for (int i = 0;i<graph.length;i++){
+                    if(graph[currentVertex][i] !=100){
+                        parent[i] =currentVertex;
+                    }
+                }
+                //changing array weights
+                for (int i =0;i<graph.length;i++){
+                    if(graph[currentVertex][i] != 100 ){
+                        if(parent[currentVertex]!=-1){
+                            weight[i] = weight[parent[currentVertex]]+graph[currentVertex][i];
+                        }
+                        else{
+                            weight[i] = graph[currentVertex][i];
+                        }
+
+                    }
+                }
+                //changing marked array; The following section is used to determine what vertex will be visited next:
+                int minimumWeight = 100;//used to determine which vertex to pick
+                int nextMinimumVertex;
+                for (int i = 0; i<weight.length;i++){
+                    if(weight[i]< minimumWeight && !marked[i]){
+
+                        minimumWeight = weight[i];
+
+                    }
+                }
+                nextMinimumVertex = getArrayIndex(weight,minimumWeight);//gets the index (vertex) with smallest weight
 
 
-        //changing parent array
-        for (int i = 0;i<graph.length;i++){
-            if(graph[index][i] !=100){
-                parent[i] = index;
+
+/************PRINTING RESULTS AFTER EACH  VERTEX IS LOOKED AT *******************************************************************/
+
+
+                System.out.println("Current Vertex: "+ currentVertex);
+
+                System.out.println("Marked graph: ");
+                for (int i = 0; i<marked.length;i++){
+                    System.out.print(marked[i] + " ");
+                }
+                System.out.println();
+                System.out.println("Parent:");
+                for (int i = 0; i<marked.length;i++){
+                    System.out.print(parent[i]+ " ");
+                }
+                System.out.println();
+                System.out.println("Weight: ");
+                for (int i = 0; i<weight.length;i++){
+                    System.out.print(weight[i]+ " ");
+                }
+                System.out.println();
+                System.out.println();
+
+
+
+                currentVertex = nextMinimumVertex;
+
+                System.out.println("Current Vertex: "+ currentVertex);
+                System.out.println("------------------------------");
             }
-        }
-        //changing array weights
-        for (int i =0;i<graph.length;i++){
-            if(graph[index][i] != 100){
-                weight[i] = graph[index][i];
-            }
-        }
-        //changing marked array:
-        int nextMinimumIndex = 100; //variable will be used to determine which vertex will follow
-        //if it has the minumum weight and
-        //it is unmarked, pick it next
-        for (int i = 0; i<marked.length;i++){
-            if(weight[i]< nextMinimumIndex){
-                nextMinimumIndex = weight[i];
-            }
-            if(!marked[i]){
-
-            }
-
-        }
-
-
-
-
-
-
-/********************************************************************************************************************/
-        //printing results after each change
-        System.out.println("Marked graph: ");
-        for (int i = 0; i<marked.length;i++){
-            System.out.print(marked[i] + " ");
-        }
-        System.out.println();
-        System.out.println("Parent:");
-        for (int i = 0; i<marked.length;i++){
-            System.out.print(parent[i]+ " ");
-        }
-        System.out.println();
-        System.out.println("Weight: ");
-        for (int i = 0; i<weight.length;i++){
-            System.out.print(weight[i]+ " ");
-        }
-        System.out.println();
-        System.out.println();
-        System.out.println((char)(index+97) + " origin");
-
+        System.out.println(vertex+ " origin");
         for (int i =0;i<graph.length;i++){
             System.out.println((char)(i+97) +" " +weight[i]);
         }
+    }
 
+        /**method used to obtain array index **/
+    private static int getArrayIndex(int[] arr,int value) {
 
-    } //end of dijkstra
+        int k=0;
+        for(int i=0;i<arr.length;i++){
 
+            if(arr[i]==value){
+                k=i;
+                break;
+            }
+        }
+        return k;
+    }
     /*the following method is used to stop dijkstra's after all vertices are visited */
     private static boolean markedCheck(boolean []markedGraph){
-        boolean check = false;
+        boolean check = true;
         for (int i = 0;i<markedGraph.length;i++){
-            if(markedGraph[i]){
-                check =true;
+            if(!markedGraph[i]){
+                check =false;
             }
         }
         return check;
