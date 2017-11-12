@@ -64,9 +64,9 @@ public class Group02
 
                 };
         int [][]sample = {{0,1,0,0},
-                         {0,0,10,0 },
-                         {0,0,0,5},
-                         {2,0,0,0}};
+                          {0,0,10,0},
+                          {0,0,0,5},
+                          {2,0,0,0}};
         //mygraph.dijkstra(0);
 
         shortestPath(powerpoint,0);
@@ -89,6 +89,7 @@ public class Group02
             parent[i] = -1;
             weight[i] =Integer.MAX_VALUE;
         }
+        int root = vertex;
         int currentVertex = vertex;
         weight[currentVertex] = 0;
 
@@ -129,6 +130,7 @@ public class Group02
                 nextMinimumVertex = getArrayIndex(weight,minimumWeight);//gets the index (vertex) with smallest weight
 
 
+
 /************PRINTING RESULTS AFTER EACH  VERTEX IS LOOKED AT *******************************************************************/
 
                 System.out.println("Current Vertex: "+ currentVertex);
@@ -151,11 +153,18 @@ public class Group02
                 System.out.println();
 
 
+                if(nextMinimumVertex != root){
+                    currentVertex = nextMinimumVertex;
+                }else{
+                    weight[root] = 0;
+                }
 
-                currentVertex = nextMinimumVertex;
 
+                System.out.println("next minimum vertex: "+ nextMinimumVertex);
                 System.out.println("Current Vertex: "+ currentVertex);
-                System.out.println("END OF ITERATION");
+                
+                System.out.println("-----------------END OF ITERATION------------");
+                System.out.println();
             }
         System.out.println(vertex+ " origin");
         for (int i =0;i<graph.length;i++){
