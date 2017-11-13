@@ -49,44 +49,14 @@ public class Group02 {
         //mygraph.dijkstra(args[1].charAt(0)); //calling the shortestPath class as an object
         //System.out.println(mygraph.checkGraphCreation());
 
-       
-
-        int[][] powerpoint =
-                {
-                        {0, 8, 0, 4, 9},
-                        {0, 0, 1, 0, 0},
-                        {0, 2, 0, 0, 3},
-                        {0, 0, 1, 0, 0},
-                        {0, 0, 2, 7, 0}
-
-                };
-        int[][] sample = {{0, 1, 0, 0},
-                {0, 0, 10, 0},
-                {0, 0, 0, 5},
-                {2, 0, 0, 0}};
-        //mygraph.dijkstra(0);
-
         mygraph.shortestPath(0);
 
     }
 
     /*Dijkstra algorithm. Takes in a graph and int c which represents the starting index*/
-    private void dijkstra(char c) {
-
-    }
-
-
     private void shortestPath(int vertex) {
 
         //General Dijkstra algo
-//        int[][] graph = {
-//                {0, 8, 0, 4, 9},
-//                {0, 0, 1, 0, 0},
-//                {0, 2, 0, 0, 3},
-//                {0, 0, 1, 0, 0},
-//                {0, 0, 2, 7, 0}
-//
-//        };
 
         /**Array setup*/
         boolean marked[] = new boolean[graph.length]; // Keeps track of vertices that have been visited
@@ -134,64 +104,12 @@ public class Group02 {
             nextMinimumVertex = getArrayIndex(weight, minimumWeight);//gets the index (vertex) with smallest weight
 
 
-/************PRINTING RESULTS AFTER EACH  VERTEX IS LOOKED AT *******************************************************************/
-
-
-            System.out.println("Current Vertex: " + currentVertex);
-
-
-            System.out.println("Marked graph: ");
-            for (int i = 0; i < marked.length; i++) {
-                System.out.print(marked[i] + " ");
-            }
-            System.out.println();
-            System.out.println("Parent:");
-            for (int i = 0; i < marked.length; i++) {
-                System.out.print(((char) (parent[i] + 97) + " "));
-            }
-            System.out.println();
-            System.out.println("Weight: ");
-            for (int i = 0; i < weight.length; i++) {
-                System.out.print(weight[i] + " ");
-            }
-            System.out.println();
-            System.out.println();
-
-
-            System.out.println("Marked graph: ");
-            for (int i = 0; i < marked.length; i++) {
-                System.out.print(marked[i] + " ");
-            }
-            System.out.println();
-            System.out.println("Parent:");
-            for (int i = 0; i < marked.length; i++) {
-                System.out.print(((char) (parent[i] + 97) + " "));
-            }
-            System.out.println();
-            System.out.println("Weight: ");
-            for (int i = 0; i < weight.length; i++) {
-                System.out.print(weight[i] + " ");
-            }
-            System.out.println();
-            System.out.println();
-
-
             if (nextMinimumVertex != root) {
                 currentVertex = nextMinimumVertex;
             } else {
                 weight[root] = 0;
             }
 
-
-
-
-            System.out.println("next minimum vertex: " + nextMinimumVertex);
-            System.out.println("Current Vertex: " + currentVertex);
-
-            System.out.println("VERTEX PATH: ");
-
-            System.out.println("-----------------END OF ITERATION------------");
-            System.out.println();
         } while (!(markedCheck(marked, weight)));
         System.out.println(((char)(vertex + 97)) + " origin");
         for (int i = 0; i < graph.length; i++) {
