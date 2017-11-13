@@ -48,6 +48,9 @@ public class Group02 {
         Group02 mygraph = new Group02(args[0]); // created a java object using classname
         //mygraph.dijkstra(args[1].charAt(0)); //calling the shortestPath class as an object
         //System.out.println(mygraph.checkGraphCreation());
+
+       
+
         int[][] powerpoint =
                 {
                         {0, 8, 0, 4, 9},
@@ -62,7 +65,9 @@ public class Group02 {
                 {0, 0, 0, 5},
                 {2, 0, 0, 0}};
         //mygraph.dijkstra(0);
+
         mygraph.shortestPath(0);
+
     }
 
     /*Dijkstra algorithm. Takes in a graph and int c which represents the starting index*/
@@ -70,7 +75,9 @@ public class Group02 {
 
     }
 
+
     private void shortestPath(int vertex) {
+
         //General Dijkstra algo
 //        int[][] graph = {
 //                {0, 8, 0, 4, 9},
@@ -132,6 +139,25 @@ public class Group02 {
 
             System.out.println("Current Vertex: " + currentVertex);
 
+
+            System.out.println("Marked graph: ");
+            for (int i = 0; i < marked.length; i++) {
+                System.out.print(marked[i] + " ");
+            }
+            System.out.println();
+            System.out.println("Parent:");
+            for (int i = 0; i < marked.length; i++) {
+                System.out.print(((char) (parent[i] + 97) + " "));
+            }
+            System.out.println();
+            System.out.println("Weight: ");
+            for (int i = 0; i < weight.length; i++) {
+                System.out.print(weight[i] + " ");
+            }
+            System.out.println();
+            System.out.println();
+
+
             System.out.println("Marked graph: ");
             for (int i = 0; i < marked.length; i++) {
                 System.out.print(marked[i] + " ");
@@ -157,8 +183,12 @@ public class Group02 {
             }
 
 
+
+
             System.out.println("next minimum vertex: " + nextMinimumVertex);
             System.out.println("Current Vertex: " + currentVertex);
+
+            System.out.println("VERTEX PATH: ");
 
             System.out.println("-----------------END OF ITERATION------------");
             System.out.println();
@@ -166,10 +196,33 @@ public class Group02 {
         System.out.println(((char)(vertex + 97)) + " origin");
         for (int i = 0; i < graph.length; i++) {
             if (weight[i] != Integer.MAX_VALUE) {
-                System.out.println((char) (i + 97) + " " + weight[i]);
+                System.out.println((char) (i + 97) + " " + weight[i] +" "+ vertexPath(parent, i));
             }
         }
     }
+
+    /**
+     * Method used to obtain path
+     */
+    private static String vertexPath(int parent[],int root){
+
+     int i = root;
+        String output = "";
+if(root !=0) {
+    do {
+        output += ((char) (parent[i] + 97));
+
+        i = parent[i];
+    } while (parent[i] != -1);
+   return new StringBuilder(output).reverse().toString();
+
+}else{
+    return " ";
+}
+
+
+    }
+
 
     /**
      * method used to obtain array index
@@ -185,7 +238,7 @@ public class Group02 {
             }
         }
         return k;
-    }
+    }//end of getArrayIndex
 
     /*the following method is used to stop dijkstra's after all vertices are visited */
     private static boolean markedCheck(boolean[] markedGraph, int[] weight) {
@@ -210,7 +263,9 @@ public class Group02 {
         return output;
     }
 
+
 }
+
 
 
 
