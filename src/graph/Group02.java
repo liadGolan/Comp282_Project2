@@ -48,16 +48,8 @@ public class Group02 {
         Group02 mygraph = new Group02(args[0]); // created a java object using classname
         //mygraph.dijkstra(args[1].charAt(0)); //calling the shortestPath class as an object
         //System.out.println(mygraph.checkGraphCreation());
-        int website[][] = new int[][]{{0, 4, 0, 0, 0, 0, 0, 8, 0},
-                {4, 0, 8, 0, 0, 0, 0, 11, 0},
-                {0, 8, 0, 7, 0, 4, 0, 0, 2},
-                {0, 0, 7, 0, 9, 14, 0, 0, 0},
-                {0, 0, 0, 9, 0, 10, 0, 0, 0},
-                {0, 0, 4, 14, 10, 0, 2, 0, 0},
-                {0, 0, 0, 0, 0, 2, 0, 1, 6},
-                {8, 11, 0, 0, 0, 0, 1, 0, 7},
-                {0, 0, 2, 0, 0, 0, 6, 7, 0}
-        };
+
+
         int[][] powerpoint =
                 {
                         {0, 8, 0, 4, 9},
@@ -72,8 +64,9 @@ public class Group02 {
                 {0, 0, 0, 5},
                 {2, 0, 0, 0}};
         //mygraph.dijkstra(0);
-        //mygraph.shortestPath(0);
-        shortestPath(website, 0);
+
+        mygraph.shortestPath(0);
+
     }
 
     /*Dijkstra algorithm. Takes in a graph and int c which represents the starting index*/
@@ -81,7 +74,9 @@ public class Group02 {
 
     }
 
-    private static void shortestPath(int[][]graph, int vertex) {
+
+    private void shortestPath(int vertex) {
+
         //General Dijkstra algo
 //        int[][] graph = {
 //                {0, 8, 0, 4, 9},
@@ -143,6 +138,25 @@ public class Group02 {
 
             System.out.println("Current Vertex: " + currentVertex);
 
+
+            System.out.println("Marked graph: ");
+            for (int i = 0; i < marked.length; i++) {
+                System.out.print(marked[i] + " ");
+            }
+            System.out.println();
+            System.out.println("Parent:");
+            for (int i = 0; i < marked.length; i++) {
+                System.out.print(((char) (parent[i] + 97) + " "));
+            }
+            System.out.println();
+            System.out.println("Weight: ");
+            for (int i = 0; i < weight.length; i++) {
+                System.out.print(weight[i] + " ");
+            }
+            System.out.println();
+            System.out.println();
+
+
             System.out.println("Marked graph: ");
             for (int i = 0; i < marked.length; i++) {
                 System.out.print(marked[i] + " ");
@@ -168,8 +182,12 @@ public class Group02 {
             }
 
 
+
+
             System.out.println("next minimum vertex: " + nextMinimumVertex);
             System.out.println("Current Vertex: " + currentVertex);
+
+
 
             System.out.println("-----------------END OF ITERATION------------");
             System.out.println();
@@ -221,4 +239,13 @@ public class Group02 {
         return output;
     }
 
+
 }
+
+
+
+
+
+
+
+
