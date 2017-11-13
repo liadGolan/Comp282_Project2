@@ -187,7 +187,7 @@ public class Group02 {
             System.out.println("next minimum vertex: " + nextMinimumVertex);
             System.out.println("Current Vertex: " + currentVertex);
 
-
+            System.out.println("VERTEX PATH: ");
 
             System.out.println("-----------------END OF ITERATION------------");
             System.out.println();
@@ -195,10 +195,33 @@ public class Group02 {
         System.out.println(((char)(vertex + 97)) + " origin");
         for (int i = 0; i < graph.length; i++) {
             if (weight[i] != Integer.MAX_VALUE) {
-                System.out.println((char) (i + 97) + " " + weight[i]);
+                System.out.println((char) (i + 97) + " " + weight[i] +" "+ vertexPath(parent, i));
             }
         }
     }
+
+    /**
+     * Method used to obtain path
+     */
+    private static String vertexPath(int parent[],int root){
+
+     int i = root;
+        String output = "";
+if(root !=0) {
+    do {
+        output += ((char) (parent[i] + 97));
+
+        i = parent[i];
+    } while (parent[i] != -1);
+   return new StringBuilder(output).reverse().toString();
+
+}else{
+    return " ";
+}
+
+
+    }
+
 
     /**
      * method used to obtain array index
@@ -214,7 +237,7 @@ public class Group02 {
             }
         }
         return k;
-    }
+    }//end of getArrayIndex
 
     /*the following method is used to stop dijkstra's after all vertices are visited */
     private static boolean markedCheck(boolean[] markedGraph, int[] weight) {
