@@ -46,7 +46,7 @@ public class Group02 {
     {
 
         Group02 mygraph = new Group02(args[0]); // created a java object using classname
-        //mygraph.dijkstra(args[1].charAt(0)); //calling the shortestPath class as an object
+        mygraph.shortestPath(args[1].charAt(0)-97); //calling the shortestPath class as an object
         //System.out.println(mygraph.checkGraphCreation());
 
        
