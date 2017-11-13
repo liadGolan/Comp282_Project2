@@ -49,7 +49,6 @@ public class Group02 {
         mygraph.shortestPath(args[1].charAt(0)-97); //calling the shortestPath class as an object
         //System.out.println(mygraph.checkGraphCreation());
 
-       
 
         int[][] powerpoint =
                 {
@@ -66,7 +65,7 @@ public class Group02 {
                 {2, 0, 0, 0}};
         //mygraph.dijkstra(0);
 
-        mygraph.shortestPath(0);
+        mygraph.shortestPath(2);
 
     }
 
@@ -183,8 +182,6 @@ public class Group02 {
             }
 
 
-
-
             System.out.println("next minimum vertex: " + nextMinimumVertex);
             System.out.println("Current Vertex: " + currentVertex);
 
@@ -193,10 +190,10 @@ public class Group02 {
             System.out.println("-----------------END OF ITERATION------------");
             System.out.println();
         } while (!(markedCheck(marked, weight)));
-        System.out.println(((char)(vertex + 97)) + " origin");
+        System.out.println(((char) (vertex + 97)) + " origin");
         for (int i = 0; i < graph.length; i++) {
             if (weight[i] != Integer.MAX_VALUE) {
-                System.out.println((char) (i + 97) + " " + weight[i] +" "+ vertexPath(parent, i));
+                System.out.println((char) (i + 97) + " " + weight[i] + " " + vertexPath(parent,root, i));
             }
         }
     }
@@ -204,21 +201,21 @@ public class Group02 {
     /**
      * Method used to obtain path
      */
-    private static String vertexPath(int parent[],int root){
+    private static String vertexPath(int parent[], int root, int end) {
 
-     int i = root;
+        int i = end;
         String output = "";
-if(root !=0) {
-    do {
-        output += ((char) (parent[i] + 97));
+        if (i != root  ) {
+            do {
+                output += ((char) (parent[i] + 97));
 
-        i = parent[i];
-    } while (parent[i] != -1);
-   return new StringBuilder(output).reverse().toString();
+                i = parent[i];
+            } while (parent[i] != -1);
+            return new StringBuilder(output).reverse().toString();
 
-}else{
-    return " ";
-}
+        } else {
+            return " ";
+        }
 
 
     }
